@@ -189,7 +189,7 @@ alumnoController.crear_usuario = (req, res) => {
     console.log('Registrando Usuario');
     const passw = req.body.password;
     const rondasDeSal = 10;
-    var id = Math.floor(Math.random()*1257)+5;
+    var id = Math.floor(Math.random()*1256757)+5;
     bcrypt.hash(passw, rondasDeSal, (err, password) => {
         if (err) {
             console.log("Error hasheando:", err);
@@ -216,7 +216,7 @@ alumnoController.crear_usuario = (req, res) => {
                 Password: password,
                 Grupo: null,
                 Generacion: null,
-                Username: req.body._id,
+                Username: req.body.usuario, 
                 Roles: req.body.role,
             });
             alumno.save(function (err, alumno) {
