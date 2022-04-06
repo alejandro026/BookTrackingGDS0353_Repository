@@ -13,7 +13,7 @@ block content
                 each alumno in Alumno
                   .col
                     label.form-label(for='numControl') No. de Control
-                    input#numControl.form-control(type='number' name='numControl' required  value=alumno._id)
+                    input#numControl.form-control(type='number' readonly name='numControl' required  value=alumno._id)
                     label.form-label(for='nombre') Nombre:
                     input#nombre.form-control(type='text' name='nombre' required=''  value=alumno.Nombre_s)
                     label.form-label(for='apPaterno') Apellido paterno:
@@ -30,10 +30,13 @@ block content
                     label.form-label(for='generacion') Generaci&oacute;n:
                     input#generacion.form-control(type='text' name='generacion' required  value=alumno.Generacion)
                     label.form-label(for='sexo') Sexo:
-                    select#sexo.form-control(name='sexo' required  value=alumno.Genero)
-                      option
-                      option Masculino
-                      option Femenino
+                    select#sexo.form-control(name='sexo' required)
+                      if alumno.Genero =="Hombre"
+                        option #{alumno.Genero}
+                        option Mujer
+                      else
+                        option #{alumno.Genero}
+                        option Hombre
                     label.form-label(for='curp') CURP:
                     input#curp.form-control(type='text' name='curp' required  value=alumno.CURP)
                     .row
@@ -46,7 +49,7 @@ block content
                     .row
                       .col
                         label.form-label(for='lada') Lada:
-                        input#lada.form-control(type='number' name='lada' required  value=alumno.Clave_lada)
+                        input#lada.form-control(type='number' pattern='[0-9]{5}' name='lada' required  value=alumno.Clave_Lada)
                       .col
                         label.form-label(for='telefonoFijo1') Telefono fijo 1:
                         input#c.form-control(type='number' name='telefonoFijo1'  value=alumno.Telefono_de_contacto_fijo_1)
@@ -56,6 +59,8 @@ block content
                     input#telefonoMovil.form-control(type='number' name='telefonoMovil'  value=alumno.Telefono_movil_celular)
                     .row
                       .col(style='text-align: right; padding-top: 10px')
-                        button.btn(href='#') Cancelar
-                        button.btn.btn-danger(type='submit')
+                         a.btn.btn-danger(href='/administrar/lista_usuario') 
+                              | Cancelar
+                      .col(style='text-align: right; padding-top: 10px')
+                        button.btn.btn-success(type='submit')
                           | Editar
